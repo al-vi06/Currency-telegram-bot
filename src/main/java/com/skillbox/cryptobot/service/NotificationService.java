@@ -33,9 +33,13 @@ public class NotificationService {
 
         subsctiberRepository.findAllByTargetPriceIsNotNull()
                 .stream()
+//                .filter(sub -> {
+//                            return sub.getTargetPrice() > currentPrice;
+//                            })
                 .filter(sub -> sub.getTargetPrice() > currentPrice)
                 .filter(this::canNotify)
                 .forEach(sub -> notify(sub, currentPrice));
+
     }
 
     private boolean canNotify(Subscribers sub) {
